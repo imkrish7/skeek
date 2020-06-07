@@ -1,27 +1,75 @@
 import React from 'react';
 import { getList } from './actions/listActions';
 import { connect } from 'react-redux';
+import  List  from './views/List';
+import Search from './views/Search';
+import pickby from 'lodash.pickby';
+import FilterByTag from './views/FilterByTag';
 import './App.css';
 
 class App extends React.Component {
 
 	constructor(props){
 		super(props)
+		this.state = {
+			students: [],
+			search: ""
+		}
 	}
 	componentDidMount(){
 		this.props.getList({});
 	}
 
 	componentDidUpdate(prevProps, prevState){
-		console.log(this.props)
+		if(prevProps.listResponse != this.props.listResponse && this.props.listResponse.data){
+			let tempList = this.props.listResponse.data.students.slice();
+			let list = [...tempList.map(student => {
+				let data ={ ...student };
+				let grade_length = student.grades.length;
+				data['avg'] = student.grades.reduce( (acc, grade) => acc + parseInt(grade), 0) /grade_length 
+				data['tags'] = [];
+				return data;
+			})]
+			
+			this.setState({
+				students: [...list]
+			})
+		}
+	}
+
+	handleFilter = (search)=>{
+		this.setState({
+			search: search  
+		})
+	}
+
+	addTag = (i, tag)=>{
+		let list = [...this.state.students];
+		list[i].tags.push(tag);
+		this.setState({
+			students: [...list]
+		})
 	}
 
 	render() {
-		return (
-			<div className="App">
-				<div className="card" />
-			</div>
-		);
+		let { students, search } = this.state;
+		const searchRE = new RegExp(search, 'i');
+		if(search.length>0){
+			let temps = null; 
+			temps = pickby(this.state.students, value => value.firstName.match(searchRE) || value.lastName.match(searchRE));
+			if(temps == null){
+				students = students.filter(student => student.tags.indexOf(search) >= 0);
+			}else{
+				students = Object.keys(temps).map( entity => temps[entity])
+			}
+		}
+		return <div className="App">
+				<div className="card">
+					<Search filter={this.handleFilter} />
+					<FilterByTag filterByTag={this.handleFilter} />
+					{this.state.students.length > 0 && <List addTag={this.addTag} students={[...students]} />}
+				</div>
+			</div>;
 	}
 }
 
@@ -31,11 +79,11 @@ const mapStateToProps = state =>{
 	}
 }
 
-const mapActionToProps = dispatch =>{
+const mapDispatchToProps = dispatch =>{
 	return {
 		getList: params => dispatch(getList(params))
 	}
 }
 
 
-export default connect(mapStateToProps, mapActionToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -14,4 +14,101 @@
   flex-direction: column;
   border-radius: 0.5rem;
   box-shadow: 0px 0px 0px 4px #fff, 0px 0px 0px 4px #ccc;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.list_item{
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.list_item_avatar_wrap{
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  width: 7rem;
+  height: 7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.expand{
+  font-size: 2rem;
+  color: #ccc;
+  
+}
+
+.expand_btn{
+  cursor: pointer;
+}
+
+.list_item_avatar_wrap{
+  margin-right: 1rem;
+}
+
+.list_item_avatar{
+  width: 60%;
+  height: 60%;
+}
+
+.list_item_text_wrap{
+  display: flex;
+  flex: 0 0 90%;
+}
+
+.list_item_info_text{
+  flex: 0 0 70%
+}
+
+ul{
+  list-style: none;
+  color: #919191;
+}
+.list_item_info_subtext_list{
+  list-style: none;
+  color: #919191;
+}
+.subtext_item:nth-child(1){
+  margin-right: 0.5rem;
+}
+
+.left{
+  margin-right: 0.5rem;
+}
+.right{
+  margin-left: 0.5rem;
+}
+
+.grades{
+  margin-top: 0.5rem;
+  transition: 0.5 all ease-in;
+}
+
+.search{
+ margin: 0.5rem 0rem;
+  width: 100%;
+}
+
+.input{
+  width: 100%;
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
+  border: none;
+  border-bottom: 1px solid #ccc;
+}
+
+.input:active, .input:focus{
+  outline: none;
+}
+
+.btn{
+  border: none;
+  color: #ccc;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 0.2rem;
+  margin: 0rem 0.5rem;
 }
