@@ -11,7 +11,7 @@ This project was about api call which shows the list of students and their test 
 // Install dependencies
 npm install
 
-Once all dependencies installed, run
+// Once all dependencies installed, run
 
 npm start
 ```
