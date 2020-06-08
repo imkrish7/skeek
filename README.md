@@ -3,7 +3,7 @@ This project was about api call which shows the list of students and their acade
 # API for students list
 
 ## https://www.hatchways.io/api/assessment/students
-
+```
 # Available Scripts
 
 # To install packages
@@ -15,3 +15,4 @@ Navigate to root directory
 Once all dependencies installed, run
 
 ## npm start
+```
