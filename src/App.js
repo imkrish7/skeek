@@ -37,14 +37,15 @@ class App extends React.Component {
 			})
 		}
 	}
-	// Add filter
+	// Add name filter
 	handleNameFilter = (filter)=>{
 		this.setState({
 			nameFilter: filter
 		})
 	}
-
+	// Add tag filter
 	handleTagFilter = (tagFilter)=>{
+		console.log(tagFilter);
 		this.setState({
 			tagFilter: tagFilter
 		})
@@ -60,7 +61,7 @@ class App extends React.Component {
 
 	render() {
 		let { students, nameFilter,  tagFilter } = this.state;
-		const searchRE = new RegExp(nameFilter, 'i');
+		let searchRE = new RegExp(nameFilter, 'i')
 		if(nameFilter.length > 0 || tagFilter.length > 0){
 			let temps = null; 
 			temps = pickby(this.state.students, value => value.firstName.match(searchRE) || value.lastName.match(searchRE));
@@ -68,12 +69,12 @@ class App extends React.Component {
 			if (temps != null && Object.keys(temps).length != 0) {
 				students = Object.keys(temps).map(entity => temps[entity]);
 			}
-			if (Object.keys(temps).length == 0) {
-				students = [];
-			}
+			if (nameFilter.length > 0 && Object.keys(temps).length == 0){
+				students = []
+			} 
 			if (tagFilter.length > 0) {
-				students = students.filter(student => student.tags.indexOf(tagFilter) >= 0);
-			}	
+					students = students.filter(student => student.tags.length > 0 && student.tags.indexOf(tagFilter) >= 0);
+				}	
 		}
 		return <div className="App">
 				<div className="card">

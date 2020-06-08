@@ -33,7 +33,7 @@ class ListRow extends Component {
 						<h1>
 							{`${this.props.data.firstName} ${this.props.data.lastName}`}
 						</h1>
-						<div className="subtext">
+						<div className="list_item_info_subtext">
 							<ul className="list_item_info_subtext_list">
 								<li className="list_item_info_subtext_item">
 									<span className="subtext_item">Email</span>

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import debounce from 'lodash.debounce';
-class FilterByTag extends Component {
+class FilterByTag extends PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {

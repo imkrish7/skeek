@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
-class AddTag extends Component{
+class AddTag extends PureComponent{
 
 	constructor(props){
 		super(props);

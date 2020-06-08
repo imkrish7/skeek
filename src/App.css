@@ -86,22 +86,21 @@
   flex: 0 0 70%
 }
 
+
 ul{
   list-style: none;
   color: #919191;
 }
-.list_item_info_subtext_list{
-  list-style: none;
-  color: #919191;
+
+.list_item_info_subtext{
+  padding: 0.5rem;
 }
 
 .subtext_item:nth-child(1){
   margin-right: 0.5rem;
 }
 
-.subtext{
-  padding: 0.5rem;
-}
+
 
 .left{
   margin-right: 0.5rem;
