@@ -1,4 +1,4 @@
-This project was about api call which shows the list of students and their academic information. It includes their name,  company, an average test score of tests and each test score. User can add tags for each student and filter by those tags as well. And students could filter by first and last name too.
+This project was about api call which shows the list of students and their test information. It includes their name,  company, an average test score of tests and each test score. User can add tags for each student and filter by those tags as well. And students could filter by first and last name too.
 
 # API for students list
 
