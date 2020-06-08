@@ -6,13 +6,10 @@ class List extends Component {
 		super(props);
 	}
 
-	componentDidMount() {
-		console.log(this.props);
-	}
 
 	render() {
 		return (
-			<div>
+			<div className="list">
 				{this.props.students.map((student, ind) => {
 					return <ListRow key={student.id} addTag={this.props.addTag} index={ind} data={student} />;
 				})}

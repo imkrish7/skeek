@@ -8,10 +8,6 @@ class AddTag extends Component{
 			tag: ""
 		}
 	}
-
-	componentDidMount(){
-		// console.log(this.props)
-	}
 	handleChange = (e)=>{
 		const { name, value } = e.target;
 		this.setState({
@@ -21,13 +17,20 @@ class AddTag extends Component{
 
 	handleKeypress = (e)=>{
 		if(e.key=="Enter"){
-			this.props.addTag(this.props.index, this.state.tag)
+			let tag = this.state.tag;
+			this.setState(
+				{
+					tag: "",
+				}				
+			);
+			this.props.addTag(this.props.index, tag);
+			
 		}
 	}
 
 	render(){
 		return <div className="search">
-			<input onKeyPress={this.handleKeypress} name="tag" className="input" onChange={this.handleChange}  placeholder="Add Tags..." />
+			<input onKeyPress={this.handleKeypress} value={this.state.tag} name="tag" className="input tag" onChange={this.handleChange}  placeholder="Add Tags..." />
 		</div>
 	}
 }

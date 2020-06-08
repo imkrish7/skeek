@@ -13,7 +13,8 @@ class App extends React.Component {
 		super(props)
 		this.state = {
 			students: [],
-			search: ""
+			nameFilter: "",
+			tagFilter: ""
 		}
 	}
 	componentDidMount(){
@@ -26,7 +27,7 @@ class App extends React.Component {
 			let list = [...tempList.map(student => {
 				let data ={ ...student };
 				let grade_length = student.grades.length;
-				data['avg'] = student.grades.reduce( (acc, grade) => acc + parseInt(grade), 0) /grade_length 
+				data['avg'] = (student.grades.reduce( (acc, grade) => acc + parseInt(grade), 0) /grade_length).toFixed(2) 
 				data['tags'] = [];
 				return data;
 			})]
@@ -36,13 +37,19 @@ class App extends React.Component {
 			})
 		}
 	}
-
-	handleFilter = (search)=>{
+	// Add filter
+	handleNameFilter = (filter)=>{
 		this.setState({
-			search: search  
+			nameFilter: filter
 		})
 	}
 
+	handleTagFilter = (tagFilter)=>{
+		this.setState({
+			tagFilter: tagFilter
+		})
+	}
+	// Add Tag 
 	addTag = (i, tag)=>{
 		let list = [...this.state.students];
 		list[i].tags.push(tag);
@@ -52,21 +59,23 @@ class App extends React.Component {
 	}
 
 	render() {
-		let { students, search } = this.state;
-		const searchRE = new RegExp(search, 'i');
-		if(search.length>0){
+		let { students, nameFilter,  tagFilter } = this.state;
+		const searchRE = new RegExp(nameFilter, 'i');
+		if(nameFilter.length>0 || tagFilter.length > 0){
 			let temps = null; 
 			temps = pickby(this.state.students, value => value.firstName.match(searchRE) || value.lastName.match(searchRE));
-			if(temps == null){
-				students = students.filter(student => student.tags.indexOf(search) >= 0);
-			}else{
-				students = Object.keys(temps).map( entity => temps[entity])
+			if (temps != null && Object.keys(temps).length != 0) {
+				students = Object.keys(temps).map(entity => temps[entity]);
 			}
+			if (tagFilter.length > 0) {
+				students = students.filter(student => student.tags.indexOf(tagFilter) >= 0);
+			}
+			
 		}
 		return <div className="App">
 				<div className="card">
-					<Search filter={this.handleFilter} />
-					<FilterByTag filterByTag={this.handleFilter} />
+					<Search filter={this.handleNameFilter} />
+					<FilterByTag filterByTag={this.handleTagFilter} />
 					{this.state.students.length > 0 && <List addTag={this.addTag} students={[...students]} />}
 				</div>
 			</div>;
